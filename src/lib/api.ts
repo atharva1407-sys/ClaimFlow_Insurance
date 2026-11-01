@@ -40,6 +40,15 @@ export function parseJson<T = any>(s: string | null | undefined): T | null {
   }
 }
 
+/** True when the call comes from a page under /patient (fetches and embedded PDFs both send the page as Referer). */
+function fromPatientPortal(req: NextRequest): boolean {
+  try {
+    return new URL(req.headers.get('referer') ?? '').pathname.startsWith('/patient');
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Finds a request and checks the caller may see it. Inaccessible records answer 404, never 403,
  * so changing the ID in a URL reveals nothing about which IDs exist.
@@ -60,10 +69,13 @@ export async function loadRequest(
   const notFound = { res: fail(404, 'Request not found') };
   if (!request) return notFound;
 
-  // A staff sign-in and a verified-patient session can share one browser. Staff access wins when it applies,
-  // otherwise a patient session for exactly this request is still honoured.
+  // A staff sign-in and a verified-patient session can share one browser. Calls made from a /patient page act as the
+  // patient (the narrower role), anything else acts as staff when that applies, and a patient session for exactly
+  // this request is still honoured as the fallback.
+  const asPatient = !!patientRid && patientRid === request.id;
+  if (asPatient && fromPatientPortal(req)) return { actor: { kind: 'patient' }, request };
   if (user && canAccessRequest(user, request)) return { actor: { kind: 'staff', user }, request };
-  if (patientRid && patientRid === request.id) return { actor: { kind: 'patient' }, request };
+  if (asPatient) return { actor: { kind: 'patient' }, request };
   return notFound;
 }
 

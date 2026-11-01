@@ -1,13 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
-import { ddmmyyToIso, ddmmyyyyToIso, hhmmToInput, toDdmmyy, toDdmmyyyy, toHhmm } from '@/lib/dates';
+import { hhmmToInput, toHhmm } from '@/lib/dates';
 import { CHRONIC_ITEMS, CHRONIC_OTHER_MAP_ID, FieldDef, GroupDef, TREATMENT_LINES, labelOf } from '@/lib/section-config';
 
 type Values = Record<string, any>;
@@ -32,6 +32,58 @@ function Choice({ name, options, value, onChange, disabled }: { name: string; op
   );
 }
 
+const CHARGE_KEYS = ['costRoomRentNursing', 'costInvestigationDiagnostics', 'costIcuCharges', 'costOtCharges', 'costProfessionalFees', 'costMedicinesConsumables', 'costOtherHospitalExpenses'];
+const rupees = (v: unknown) => Number(String(v ?? '').replace(/[,\s₹]|Rs\.?/gi, '')) || 0;
+
+/** Itemised charges a to l plus other expenses; an all-inclusive package stands in when nothing is itemised. */
+function sumOfCharges(values: Values): number {
+  const itemised = CHARGE_KEYS.reduce((t, k) => t + rupees(values[k]), 0);
+  return itemised > 0 ? itemised : rupees(values.costAllInclusivePackage);
+}
+
+const slashed = (d: string) => [d.slice(0, 2), d.slice(2, 4), d.slice(4, 8)].filter(Boolean).join('/');
+
+/**
+ * Day/month/year text box (the browser's own date picker follows the machine's language and shows month first).
+ * The form stores DDMMYYYY, or DDMMYY for the 6-cell admission date; a half-typed value is kept as typed so
+ * saving flags it instead of silently dropping it.
+ */
+function DateText({ id, value, short, disabled, onChange }: { id: string; value?: string; short?: boolean; disabled?: boolean; onChange: (v: string) => void }) {
+  const toText = (stored?: string) => {
+    const d = String(stored ?? '').replace(/\D/g, '');
+    return slashed(short && d.length === 6 ? d.slice(0, 4) + '20' + d.slice(4) : d);
+  };
+  const [text, setText] = useState(toText(value));
+  const sent = useRef(value ?? '');
+  useEffect(() => {
+    if ((value ?? '') !== sent.current) { sent.current = value ?? ''; setText(toText(value)); }
+  }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const typed = text.replace(/\D/g, '');
+  const incomplete = typed.length > 0 && typed.length < 8;
+  return (
+    <>
+      <Input
+        id={id}
+        inputMode="numeric"
+        placeholder="dd/mm/yyyy"
+        maxLength={10}
+        disabled={disabled}
+        aria-invalid={incomplete || undefined}
+        value={text}
+        onChange={(e) => {
+          const d = e.target.value.replace(/\D/g, '').slice(0, 8);
+          const stored = short && d.length === 8 ? d.slice(0, 4) + d.slice(6) : d;
+          setText(slashed(d));
+          sent.current = stored;
+          onChange(stored);
+        }}
+      />
+      {incomplete && <p className="mt-1 text-xs text-amber-700">Enter the full date as dd/mm/yyyy.</p>}
+    </>
+  );
+}
+
 function Field({ def, values, set, disabled, errorFields, optionOverrides }: { def: FieldDef; values: Values; set: (k: string, v: any) => void; disabled?: boolean; errorFields?: string[]; optionOverrides?: Record<string, string[]> }) {
   const v = values[def.key];
   const id = `f-${def.key}`;
@@ -43,10 +95,10 @@ function Field({ def, values, set, disabled, errorFields, optionOverrides }: { d
       control = <Textarea id={id} rows={3} disabled={disabled} value={v ?? ''} onChange={(e) => set(def.key, e.target.value)} />;
       break;
     case 'date8':
-      control = <Input id={id} type="date" disabled={disabled} value={ddmmyyyyToIso(v)} onChange={(e) => set(def.key, e.target.value ? toDdmmyyyy(e.target.value) : '')} />;
+      control = <DateText id={id} value={v} disabled={disabled} onChange={(x) => set(def.key, x)} />;
       break;
     case 'date6':
-      control = <Input id={id} type="date" disabled={disabled} value={ddmmyyToIso(v)} onChange={(e) => set(def.key, e.target.value ? toDdmmyy(e.target.value) : '')} />;
+      control = <DateText id={id} value={v} short disabled={disabled} onChange={(x) => set(def.key, x)} />;
       break;
     case 'time':
       control = <Input id={id} type="time" disabled={disabled} value={hhmmToInput(v)} onChange={(e) => set(def.key, e.target.value ? toHhmm(e.target.value) : '')} />;
@@ -92,9 +144,17 @@ function Field({ def, values, set, disabled, errorFields, optionOverrides }: { d
     <div className={`space-y-1.5 ${def.wide ? 'sm:col-span-2' : ''}`}>
       <Label htmlFor={id} className={bad ? 'text-rose-600' : undefined}>
         {labelOf(def.mapId)}
-        {def.cells ? <span className="ml-1 font-normal text-slate-500">({def.cells} boxes)</span> : null}
       </Label>
       <div className={bad ? 'rounded-xl ring-2 ring-rose-400' : undefined}>{control}</div>
+      {def.key === 'costSumTotalExpected' && !disabled && (
+        <button
+          type="button"
+          onClick={() => set(def.key, String(sumOfCharges(values)))}
+          className="text-xs font-semibold text-primary hover:underline"
+        >
+          Fill with the total of the charges above
+        </button>
+      )}
       {bad && <p role="alert" className="text-xs font-semibold text-rose-600">Please check this value.</p>}
     </div>
   );

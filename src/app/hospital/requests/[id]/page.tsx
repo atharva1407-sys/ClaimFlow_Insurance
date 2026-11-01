@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { AlertTriangle, Eye, KeyRound, Loader2, Send, Trash2 } from 'lucide-react';
+import { AlertTriangle, Eye, KeyRound, ListChecks, Loader2, Send, Trash2 } from 'lucide-react';
 import { PortalShell } from '@/components/layout/PortalShell';
 import { PageSkeleton } from '@/components/ui/skeleton';
 import { Alert } from '@/components/ui/alert';
@@ -32,6 +32,10 @@ const PILL: Record<string, 'neutral' | 'info' | 'success' | 'danger'> = {
   SUBMITTED: 'success',
   RETURNED_FOR_CORRECTION: 'danger',
   REVIEWED: 'success',
+};
+
+const STATUS_WORDS: Record<string, string> = {
+  NOT_STARTED: 'not started', IN_PROGRESS: 'in progress', SUBMITTED: 'submitted', RETURNED_FOR_CORRECTION: 'returned for correction', REVIEWED: 'reviewed',
 };
 
 export default function CaseHubPage() {
@@ -121,8 +125,25 @@ export default function CaseHubPage() {
               </Card>
             )}
 
-            <div className="flex items-center gap-2 border-b border-slate-200/80 pb-1 text-sm font-semibold">
-              <Link href={`/hospital/requests/${request.requestId}/history`} className="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100">Audit trail and versions</Link>
+            <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200/80 bg-white px-5 py-4 shadow-xs">
+              <div className="flex-1 min-w-[260px]">
+                <div className="mb-2 text-sm font-bold text-slate-900">
+                  {['A', 'B', 'C', 'D'].filter((k) => ['SUBMITTED', 'REVIEWED'].includes(request[`section${k}Status`])).length} of 4 sections submitted
+                </div>
+                <div className="grid grid-cols-4 gap-2" role="list" aria-label="Section progress">
+                  {['A', 'B', 'C', 'D'].map((k) => {
+                    const st: string = request[`section${k}Status`];
+                    const bar = st === 'REVIEWED' ? 'bg-emerald-500' : st === 'SUBMITTED' ? 'bg-[#0A65FF]' : st === 'RETURNED_FOR_CORRECTION' ? 'bg-rose-500' : st === 'IN_PROGRESS' ? 'bg-amber-400' : 'bg-slate-200';
+                    return (
+                      <div key={k} role="listitem" title={`Section ${k}: ${STATUS_WORDS[st] ?? st}`}>
+                        <div className={`h-2 rounded-full ${bar}`} />
+                        <div className="mt-1 text-xs font-semibold text-slate-500">Section {k}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <Link href={`/hospital/requests/${request.requestId}/history`} className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50">Audit trail and versions</Link>
             </div>
 
             {(
@@ -221,7 +242,7 @@ export default function CaseHubPage() {
                   <Card className="rounded-2xl border-slate-200/80 shadow-xs">
                     <CardContent className="p-5 space-y-3">
                       <h3 className="text-sm font-bold text-slate-900 pb-2 border-b border-slate-100">Actions</h3>
-                      <Link href={`/hospital/requests/${request.requestId}/review`} className="block w-full text-center py-2.5 rounded-xl border border-amber-300 bg-amber-50/70 text-amber-800 text-sm font-bold hover:bg-amber-100/70">Pre-submission rules check</Link>
+                      <Link href={`/hospital/requests/${request.requestId}/review`} className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 text-sm font-bold hover:bg-slate-50"><ListChecks className="w-3.5 h-3.5" /> Pre-submission rules check</Link>
                       <Link href={`/hospital/requests/${request.requestId}/preview`} className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-blue-200 bg-blue-50/70 text-[#0A65FF] text-sm font-bold hover:bg-blue-100/70"><Eye className="w-3.5 h-3.5" /> PDF preview and versions</Link>
                     </CardContent>
                   </Card>

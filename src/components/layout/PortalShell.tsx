@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PageSkeleton } from '@/components/ui/skeleton';
 import { ROLE_LABEL, useDocumentTitle, useSession } from '@/lib/client';
 
 interface PortalShellProps {
@@ -62,7 +63,7 @@ export function PortalShell({ role, activeNav, searchPlaceholder = 'Search by pa
   const roleText = user ? ROLE_LABEL[user.role] ?? user.role : '';
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center text-sm font-semibold text-slate-500">Loading…</div>;
+    return <div className="min-h-screen bg-[#F8FAFC] p-8"><div className="mx-auto max-w-3xl pt-10"><PageSkeleton /></div></div>;
   }
   if (!user) return null; // redirecting to sign-in
 

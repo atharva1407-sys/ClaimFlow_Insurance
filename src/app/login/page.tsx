@@ -2,10 +2,9 @@
 
 import { Suspense, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Loader2, LogIn } from 'lucide-react';
+import { ClipboardList, FileCheck2, Loader2, LogIn, ShieldCheck } from 'lucide-react';
 import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ROLE_HOME, api, useDocumentTitle } from '@/lib/client';
@@ -37,18 +36,38 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#F4F7FC] p-6 font-sans">
-      <Card className="w-full max-w-sm rounded-3xl shadow-xl">
-        <CardContent className="p-8">
+    <div className="min-h-screen w-full bg-[#F4F7FC] flex items-center justify-center p-4 sm:p-6 font-sans">
+      <div className="w-full max-w-4xl bg-white rounded-3xl border border-slate-200/80 shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+        <div className="relative bg-gradient-to-br from-[#0A65FF] to-[#0440A8] p-8 text-white flex flex-col justify-between gap-10 overflow-hidden">
+          <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-white/5 pointer-events-none" />
+          <div className="absolute -left-10 -top-10 w-60 h-60 rounded-full bg-white/5 pointer-events-none" />
+          <a href="/" className="relative z-10 flex items-center gap-2.5 w-fit">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/logo.png" alt="ClaimFlow Health logo" className="w-10 h-10 object-contain drop-shadow-md" />
+            <span className="text-xl font-extrabold tracking-tight">ClaimFlow Health</span>
+          </a>
+          <div className="relative z-10 space-y-6">
+            <h2 className="text-2xl font-extrabold leading-snug tracking-tight">One cashless request, completed together and printed on the original form.</h2>
+            <ul className="space-y-4 text-sm text-blue-50">
+              {[
+                { icon: ClipboardList, title: 'Each person fills their own part', text: 'Hospital desk, patient and doctor edit only their section.' },
+                { icon: FileCheck2, title: "The insurer's own form", text: 'Values are written onto the original four-page Bajaj form.' },
+                { icon: ShieldCheck, title: 'Private and traceable', text: 'Access is limited to your hospital, and every change is logged.' },
+              ].map((f) => (
+                <li key={f.title} className="flex gap-3">
+                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15"><f.icon className="h-5 w-5" /></span>
+                  <span><span className="block font-bold text-white">{f.title}</span>{f.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="p-8 sm:p-10 flex flex-col justify-center">
           <form onSubmit={submit} className="space-y-5">
-            <div className="flex items-center gap-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/logo.png" alt="ClaimFlow Health logo" className="w-11 h-11 object-contain" />
-              <span className="text-lg font-extrabold tracking-tight text-slate-900">ClaimFlow <span className="text-primary">Health</span></span>
-            </div>
             <div>
-              <h1 className="text-2xl font-extrabold text-slate-900">Sign in</h1>
-              <p className="text-sm text-slate-500 mt-1">Hospital desk, doctor, emergency operator and admin accounts. Patients use the OTP link from the hospital.</p>
+              <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Sign in</h1>
+              <p className="text-sm text-slate-500 mt-1">Hospital desk, doctor, emergency operator and admin accounts.</p>
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="email">Email</Label>
@@ -59,16 +78,16 @@ function LoginForm() {
               <Input id="password" type="password" required autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
             {error && <Alert variant="destructive">{error}</Alert>}
-            <Button type="submit" disabled={busy} className="w-full">
+            <Button type="submit" disabled={busy} className="w-full h-11">
               {busy ? <Loader2 className="animate-spin" /> : <LogIn />}
               Sign in
             </Button>
-            <Button asChild variant="link" className="w-full">
-              <a href="/patient/access">I am a patient with an OTP</a>
-            </Button>
+            <p className="text-center text-sm text-slate-500">
+              Are you a patient? <a href="/patient/access" className="font-semibold text-primary hover:underline">Continue with your OTP</a>
+            </p>
           </form>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

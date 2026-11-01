@@ -68,5 +68,5 @@ export function statusLabel(r: EmergencyFlags & { status: string }): string {
   if (r.isEmergency && pending.length && PRE_SUBMISSION.concat(['SUBMITTED_TO_TPA']).includes(r.status)) {
     return `Emergency: awaiting ${pending.join(' / ')}`;
   }
-  return r.status.replace(/_/g, ' ').toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
+  return r.status.replace(/_/g, ' ').toLowerCase().replace(/^\w/, (c) => c.toUpperCase()).replace(/\btpa\b/g, 'TPA');
 }

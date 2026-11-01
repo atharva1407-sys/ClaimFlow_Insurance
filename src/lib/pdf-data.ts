@@ -15,5 +15,6 @@ export function pdfOptionsFor(r: FullRequest): GeneratePdfOptions {
     declarations: parseJson(r.declarationsData) ?? undefined,
     isEmergency: r.isEmergency,
     omitDoctorBlock: !doctorVerified,
+    title: `Cashless request ${r.requestId}`,
   };
 }

@@ -68,7 +68,7 @@ export default function RulesReviewPage() {
               {[
                 { label: 'Blocking', n: result.blockers.length + result.pdfIssues.length, cls: 'text-rose-600 bg-rose-50/40 border-rose-100', icon: AlertCircle },
                 { label: 'Warnings', n: result.warnings.length, cls: 'text-amber-600 bg-amber-50/40 border-amber-100', icon: AlertTriangle },
-                { label: result.finalisable && result.pdfIssues.length === 0 ? 'Ready to finalise' : 'Not ready', n: result.finalisable && result.pdfIssues.length === 0 ? 1 : 0, cls: 'text-emerald-600 bg-emerald-50/40 border-emerald-100', icon: CheckCircle2 },
+                { label: result.finalisable && result.pdfIssues.length === 0 ? 'Ready to finalise' : 'Not ready', n: result.finalisable && result.pdfIssues.length === 0 ? 1 : 0, cls: result.finalisable && result.pdfIssues.length === 0 ? 'text-emerald-600 bg-emerald-50/40 border-emerald-100' : 'text-slate-500 bg-slate-50/60 border-slate-200', icon: CheckCircle2 },
               ].map((c) => (
                 <Card key={c.label} className={`rounded-2xl shadow-xs ${c.cls}`}>
                   <CardContent className="p-5 flex items-center gap-3"><c.icon className="w-6 h-6" /><div><div className="text-2xl font-extrabold">{c.label === 'Ready to finalise' || c.label === 'Not ready' ? '' : c.n}</div><div className="text-sm font-bold text-slate-900">{c.label}</div></div></CardContent>

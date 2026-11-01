@@ -24,6 +24,8 @@ export interface GeneratePdfOptions {
   isEmergency?: boolean;
   /** Leave the page-2 doctor name / qualification / registration blank (doctor has not verified them). */
   omitDoctorBlock?: boolean;
+  /** Document title shown by PDF viewers instead of the template's own. */
+  title?: string;
   /** Optional supporting documents, appended as extra pages after page 4. The form pages are not changed. */
   attachments?: { name: string; bytes: Uint8Array; type: 'pdf' | 'jpg' | 'png' }[];
 }
@@ -223,6 +225,7 @@ export async function generateCashlessPdfWithReport(options: GeneratePdfOptions)
   const tpl = loadTemplate();
   const pdfDoc = await PDFDocument.load(tpl.bytes);
   const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  if (options.title) pdfDoc.setTitle(options.title, { showInWindowTitleBar: true });
   const pages = pdfDoc.getPages();
   const issues: PdfIssue[] = [];
   const flat = flattenForPdf(options);
