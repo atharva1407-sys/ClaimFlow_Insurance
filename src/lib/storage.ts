@@ -1,10 +1,15 @@
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 
 // Generated PDFs contain patient data, so they live outside /public and are only served by an
 // authenticated route. Swap this module for private object storage (S3 with SSE) in production.
 
-const ROOT = path.resolve(process.cwd(), 'storage', 'pdfs');
+const BASE_DIR = process.env.VERCEL
+  ? path.join(os.tmpdir(), 'claimflow_storage')
+  : path.resolve(process.cwd(), 'storage');
+
+const ROOT = path.join(BASE_DIR, 'pdfs');
 
 function resolveKey(key: string): string {
   const safe = path.basename(key);
@@ -33,7 +38,7 @@ export function readPdf(key: string): Buffer | null {
 }
 
 // Optional supporting documents uploaded by any role live in their own private folder.
-const DOCS_ROOT = path.resolve(process.cwd(), 'storage', 'docs');
+const DOCS_ROOT = path.join(BASE_DIR, 'docs');
 
 function resolveDoc(key: string): string {
   const safe = path.basename(key);
