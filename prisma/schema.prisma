@@ -1,0 +1,205 @@
+// Prisma schema for ClaimFlow Health - Cashless Request Management System
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Hospital {
+  id              String            @id @default(cuid())
+  name            String
+  city            String
+  state           String
+  pinCode         String
+  hospitalIdCode  String?           // Hosp Id
+  rohiniId        String?           // Rohini ID
+  landmark        String?
+  contactNo       String
+  faxNo           String?
+  tpaDeskNo       String?
+  emailId         String
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  users           User[]
+  patients        Patient[]
+  requests        CashlessRequest[]
+}
+
+model User {
+  id              String            @id @default(cuid())
+  name            String
+  email           String            @unique
+  passwordHash    String
+  role            String            // ADMIN, HOSPITAL_STAFF, DOCTOR, EMERGENCY_OPERATOR
+  phone           String?
+  specialization  String?           // For doctors e.g. "General Surgery"
+  qualification   String?           // e.g. "MBBS, MS"
+  registrationNo  String?           // e.g. "MMC20120541"
+  status          String            @default("ACTIVE") // ACTIVE, INACTIVE
+  
+  hospitalId      String?
+  hospital        Hospital?         @relation(fields: [hospitalId], references: [id])
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  assignedRequests CashlessRequest[] @relation("DoctorAssignedRequests")
+  createdRequests  CashlessRequest[] @relation("CreatedRequests")
+  auditLogs        AuditLog[]
+}
+
+model Patient {
+  id              String            @id @default(cuid())
+  patientCode     String            @unique // e.g. PAT-000125
+  name            String
+  phone           String
+  email           String?
+  addressLine1    String?
+  addressLine2    String?
+  gender          String?           // Male, Female
+  ageYears        Int?
+  ageMonths       Int?
+  dob             String?           // DDMMYYYY
+  occupation      String?
+  panNumber       String?
+  
+  hospitalId      String
+  hospital        Hospital          @relation(fields: [hospitalId], references: [id])
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  requests        CashlessRequest[]
+}
+
+model CashlessRequest {
+  id              String            @id @default(cuid())
+  requestId       String            @unique // e.g. CR-2026-00152
+  
+  hospitalId      String
+  hospital        Hospital          @relation(fields: [hospitalId], references: [id])
+
+  patientId       String
+  patient         Patient           @relation(fields: [patientId], references: [id])
+
+  doctorId        String?
+  doctor          User?             @relation("DoctorAssignedRequests", fields: [doctorId], references: [id])
+
+  createdById     String
+  createdBy       User              @relation("CreatedRequests", fields: [createdById], references: [id])
+
+  // Overall Case Status
+  status          String            @default("IN_PROGRESS") 
+  // DRAFT, IN_PROGRESS, AWAITING_PATIENT, AWAITING_DOCTOR, READY_FOR_REVIEW, 
+  // SUBMITTED_TO_TPA, TPA_QUERY, TPA_APPROVED, TPA_REJECTED, ENHANCEMENT_REQUESTED, DISCHARGED, CLOSED
+
+  // Individual Section Statuses
+  sectionAStatus  String            @default("NOT_STARTED") // NOT_STARTED, IN_PROGRESS, SUBMITTED, REVIEWED
+  sectionBStatus  String            @default("NOT_STARTED") // NOT_STARTED, IN_PROGRESS, SUBMITTED, RETURNED_FOR_CORRECTION, REVIEWED
+  sectionCStatus  String            @default("NOT_STARTED") // NOT_STARTED, IN_PROGRESS, SUBMITTED, RETURNED_FOR_CORRECTION, REVIEWED
+  sectionDStatus  String            @default("NOT_STARTED") // NOT_STARTED, IN_PROGRESS, SUBMITTED, REVIEWED
+  declarationsStatus String         @default("PENDING")     // PENDING, SIGNED
+
+  // Return notes / corrections
+  patientSectionNote String?
+  doctorSectionNote  String?
+
+  // Patient secure access
+  patientAccessToken String?        @unique
+  patientOtp         String?
+  patientOtpExpiresAt DateTime?
+  patientVerifiedAt  DateTime?
+  patientOtpAttempts Int           @default(0)
+
+  // Emergency Mode controls
+  isEmergency                 Boolean   @default(false)
+  emergencyReason             String?
+  emergencyOperatorId         String?
+  emergencyDoctorConfirmed    Boolean   @default(false)
+  emergencyDoctorConfirmedAt  DateTime?
+  emergencyPatientConfirmed   Boolean   @default(false)
+  emergencyPatientConfirmedAt DateTime?
+  emergencySupervisorReviewed Boolean   @default(false)
+  emergencySupervisorReviewedAt DateTime?
+
+  // Form Section Data Payloads (JSON strings for fast, flexible schema evolution matching field-map.json)
+  providerData    String?           // JSON Section A
+  patientData     String?           // JSON Section B
+  clinicalData    String?           // JSON Section C
+  admissionData   String?           // JSON Section D admission
+  expenseData     String?           // JSON Section D expenses
+  chronicData     String?           // JSON Section D chronic history
+  declarationsData String?          // JSON page-2 doctor block (name, qualification, registration no)
+  sectionMeta      String?          // JSON { A|B|C|D: { enteredBy, enteredByRole, enteredAt, verified } }
+
+  // TPA Submission & Query Tracking
+  tpaReferenceNo     String?
+  tpaSubmissionDate  DateTime?
+  tpaQueryNotes      String?
+  tpaApprovalAmount  Float?
+  tpaDenialReason    String?
+
+  // Versioning & PDF
+  currentVersion     Int               @default(1)   // latest PDF version number
+  caseVersion        Int               @default(1)   // bumped on every data change; PDFs are tied to it
+  latestPdfPath      String?
+
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  versions           DocumentVersion[]
+  auditLogs          AuditLog[]
+  documents          ClaimChecklistDocument[]
+}
+
+model DocumentVersion {
+  id              String            @id @default(cuid())
+  requestId       String
+  request         CashlessRequest   @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  
+  version         Int
+  caseVersion     Int               @default(1)  // case data version this PDF was generated from
+  templateVersion String            @default("") // sha256 prefix of the template PDF
+  filePath        String                         // private storage key, never a public URL
+  generatedAt     DateTime          @default(now())
+  generatedBy     String            // User name / system
+  reason          String?
+  isOutdated      Boolean           @default(false)
+}
+
+model AuditLog {
+  id              String            @id @default(cuid())
+  requestId       String?
+  request         CashlessRequest?  @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  userId          String?
+  user            User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userName        String?
+  userRole        String?
+
+  action          String            // REQUEST_CREATED, SECTION_B_SUBMITTED, EMERGENCY_MODE_INITIATED, PDF_GENERATED, etc.
+  details         String?           // JSON or summary description
+  ipAddress       String?
+  timestamp       DateTime          @default(now())
+}
+
+model ClaimChecklistDocument {
+  id              String            @id @default(cuid())
+  requestId       String
+  request         CashlessRequest   @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  checklistNumber Int               // 1 to 5 matching Page 4
+  documentTitle   String            // Discharge Summary, Cash Memos, Path Reports, etc.
+  fileName        String
+  filePath        String
+  fileSize        Int
+  uploadedAt      DateTime          @default(now())
+  uploadedBy      String
+  verified        Boolean           @default(false)
+}

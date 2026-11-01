@@ -1,0 +1,2463 @@
+[
+  {
+    "id": "provider_hospital_name",
+    "label": "Hospital Name / Nursing Home Name",
+    "page": 1,
+    "section": "Section A: Details of the Provider",
+    "owner_role": "hospital_staff",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "multiline_text",
+      "lines": [
+        {
+          "x": 173.9,
+          "y": 161.0,
+          "max_width": 374.0
+        },
+        {
+          "x": 43.7,
+          "y": 177.0,
+          "max_width": 504.5
+        }
+      ],
+      "font_size": 8.5
+    },
+    "database_field": "hospital.name"
+  },
+  {
+    "id": "provider_city",
+    "label": "City Name",
+    "page": 1,
+    "section": "Section A: Details of the Provider",
+    "owner_role": "hospital_staff",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 82.0,
+      "y": 193.0,
+      "max_width": 239.0,
+      "font_size": 8.5
+    },
+    "database_field": "hospital.city"
+  },
+  {
+    "id": "provider_pin_code",
+    "label": "Pin Code",
+    "page": 1,
+    "section": "Section A: Details of the Provider",
+    "owner_role": "hospital_staff",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 378.19,
+      "y": 195.0,
+      "cell_width": 12.468,
+      "count": 6,
+      "font_size": 9.0,
+      "grid_cells": 14
+    },
+    "database_field": "hospital.pin_code"
+  },
+  {
+    "id": "provider_state",
+    "label": "State Name",
+    "page": 1,
+    "section": "Section A: Details of the Provider",
+    "owner_role": "hospital_staff",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 86.4,
+      "y": 209.0,
+      "max_width": 234.5,
+      "font_size": 8.5
+    },
+    "database_field": "hospital.state"
+  },
+  {
+    "id": "provider_hospital_id",
+    "label": "Hosp Id",
+    "page": 1,
+    "section": "Section A: Details of the Provider",
+    "owner_role": "hospital_staff",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 378.19,
+      "y": 211.5,
+      "cell_width": 12.468,
+      "count": 14,
+      "font_size": 9.0,
+      "grid_cells": 14
+    },
+    "database_field": "hospital.hospital_id",
+    "inferred_rule": "Required if assigned by insurer / network agreement (not on the form; needs hospital confirmation)"
+  },
+  {
+    "id": "provider_landmark",
+    "label": "Landmark",
+    "page": 1,
+    "section": "Section A: Details of the Provider",
+    "owner_role": "hospital_staff",
+    "input_type": "text",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 80.8,
+      "y": 225.0,
+      "max_width": 243.5,
+      "font_size": 8.5
+    },
+    "database_field": "hospital.landmark"
+  },
+  {
+    "id": "provider_rohini_id",
+    "label": "Rohini ID",
+    "page": 1,
+    "section": "Section A: Details of the Provider",
+    "owner_role": "hospital_staff",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 378.19,
+      "y": 227.0,
+      "cell_width": 12.468,
+      "count": 14,
+      "font_size": 9.0,
+      "grid_cells": 14
+    },
+    "database_field": "hospital.rohini_id",
+    "inferred_rule": "Required if hospital is registered in ROHINI registry (not on the form; needs hospital confirmation)"
+  },
+  {
+    "id": "provider_contact_no",
+    "label": "Hospital Contact No",
+    "page": 1,
+    "section": "Section A: Details of the Provider",
+    "owner_role": "hospital_staff",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 117.0,
+      "y": 242.0,
+      "max_width": 68.0,
+      "font_size": 8.5
+    },
+    "database_field": "hospital.contact_no"
+  },
+  {
+    "id": "provider_fax_no",
+    "label": "Fax No",
+    "page": 1,
+    "section": "Section A: Details of the Provider",
+    "owner_role": "hospital_staff",
+    "input_type": "text",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 221.5,
+      "y": 242.0,
+      "max_width": 50.0,
+      "font_size": 8.5
+    },
+    "database_field": "hospital.fax_no"
+  },
+  {
+    "id": "provider_tpa_desk_no",
+    "label": "TPA desk No",
+    "page": 1,
+    "section": "Section A: Details of the Provider",
+    "owner_role": "hospital_staff",
+    "input_type": "text",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 324.0,
+      "y": 242.0,
+      "max_width": 41.0,
+      "font_size": 8.5
+    },
+    "database_field": "hospital.tpa_desk_no"
+  },
+  {
+    "id": "provider_email_id",
+    "label": "Email id",
+    "page": 1,
+    "section": "Section A: Details of the Provider",
+    "owner_role": "hospital_staff",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 400.4,
+      "y": 242.0,
+      "max_width": 149.0,
+      "font_size": 8.0
+    },
+    "database_field": "hospital.email_id"
+  },
+  {
+    "id": "patient_name",
+    "label": "a) Name of the Patient",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 127.0,
+      "y": 270.0,
+      "max_width": 423.5,
+      "font_size": 8.5
+    },
+    "database_field": "patient.name"
+  },
+  {
+    "id": "patient_address_line1",
+    "label": "b) Current Address of Insured patient (Line 1)",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 178.3,
+      "y": 286.0,
+      "max_width": 369.5,
+      "font_size": 8.0
+    },
+    "database_field": "patient.address_line1"
+  },
+  {
+    "id": "patient_address_line2",
+    "label": "Current Address (Line 2)",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 44.5,
+      "y": 302.0,
+      "max_width": 504.5,
+      "font_size": 8.0
+    },
+    "database_field": "patient.address_line2"
+  },
+  {
+    "id": "patient_gender",
+    "label": "c) Gender",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "checkbox",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "checkbox_options",
+      "options": {
+        "Male": {
+          "x": 100.3,
+          "y": 308.4,
+          "w": 12.5,
+          "h": 12.5
+        },
+        "Female": {
+          "x": 147.2,
+          "y": 308.4,
+          "w": 12.5,
+          "h": 12.5
+        }
+      }
+    },
+    "database_field": "patient.gender"
+  },
+  {
+    "id": "patient_age_years",
+    "label": "d) Age: Years",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 219.23,
+      "y": 317.5,
+      "cell_width": 12.468,
+      "count": 2,
+      "font_size": 8.5,
+      "grid_cells": 2
+    },
+    "database_field": "patient.age_years"
+  },
+  {
+    "id": "patient_age_months",
+    "label": "Age: Months",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "comb",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 278.96,
+      "y": 317.5,
+      "cell_width": 12.468,
+      "count": 2,
+      "font_size": 8.5,
+      "grid_cells": 2
+    },
+    "database_field": "patient.age_months"
+  },
+  {
+    "id": "patient_dob",
+    "label": "e) Date of birth",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "date_dmy_segmented",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 376.43,
+          "count": 2
+        },
+        {
+          "start_x": 405.34,
+          "count": 2
+        },
+        {
+          "start_x": 434.25,
+          "count": 4
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 317.5,
+      "font_size": 8.5
+    },
+    "database_field": "patient.dob"
+  },
+  {
+    "id": "patient_attendant_name",
+    "label": "f) Name of the Attendant",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 133.9,
+      "y": 332.0,
+      "max_width": 149.0,
+      "font_size": 8.5
+    },
+    "database_field": "claim_request.attendant_name"
+  },
+  {
+    "id": "patient_attendant_contact_no",
+    "label": "g) Contact number, if any (Attendant)",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "comb",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 377.22,
+      "y": 333.5,
+      "cell_width": 12.468,
+      "count": 10,
+      "font_size": 8.5,
+      "grid_cells": 10
+    },
+    "database_field": "claim_request.attendant_contact_no"
+  },
+  {
+    "id": "patient_contact_no",
+    "label": "h) Contact number",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 114.25,
+      "y": 350.0,
+      "cell_width": 12.468,
+      "count": 10,
+      "font_size": 8.5,
+      "grid_cells": 10
+    },
+    "database_field": "patient.phone"
+  },
+  {
+    "id": "insured_card_id",
+    "label": "i) Insured card ID number",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 353.0,
+      "y": 350.0,
+      "cell_width": 12.468,
+      "count": 16,
+      "font_size": 8.5,
+      "grid_cells": 16
+    },
+    "database_field": "insurance.card_id"
+  },
+  {
+    "id": "patient_occupation",
+    "label": "j) Occupation of Insured patient",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 160.5,
+      "y": 364.0,
+      "max_width": 104.0,
+      "font_size": 8.5
+    },
+    "database_field": "patient.occupation"
+  },
+  {
+    "id": "policy_number_corporate",
+    "label": "k) Policy number / Name of corporate",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 401.3,
+      "y": 364.0,
+      "max_width": 144.5,
+      "font_size": 8.0
+    },
+    "database_field": "insurance.policy_number_or_corporate"
+  },
+  {
+    "id": "employee_id",
+    "label": "l) Employee ID",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 100.22,
+      "y": 381.8,
+      "cell_width": 12.468,
+      "count": 16,
+      "font_size": 8.5,
+      "grid_cells": 16
+    },
+    "database_field": "insurance.employee_id",
+    "inferred_rule": "Required if group corporate policy (not on the form; needs hospital confirmation)"
+  },
+  {
+    "id": "insured_pan_no",
+    "label": "m) Pan No",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 349.3,
+      "y": 381.8,
+      "cell_width": 11.52,
+      "count": 10,
+      "font_size": 8.5
+    },
+    "database_field": "patient.pan_number",
+    "inferred_rule": "Required if claim estimate exceeds INR 1,00,000 per IRDA KYC (not on the form; needs hospital confirmation)"
+  },
+  {
+    "id": "proposer_name",
+    "label": "n) Name of the Proposer",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 129.5,
+      "y": 398.0,
+      "max_width": 414.5,
+      "font_size": 8.5
+    },
+    "database_field": "insurance.proposer_name"
+  },
+  {
+    "id": "proposer_ckyc",
+    "label": "CKYC of the proposer",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 140.0,
+      "y": 413.5,
+      "max_width": 405.0,
+      "font_size": 9.0
+    },
+    "database_field": "insurance.proposer_ckyc"
+  },
+  {
+    "id": "has_other_mediclaim",
+    "label": "o) Currently do you have any other Mediclaim / Health insurance",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "checkbox",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "checkbox_options",
+      "options": {
+        "Yes": {
+          "x": 274.8,
+          "y": 422.1,
+          "w": 12.5,
+          "h": 12.5
+        },
+        "No": {
+          "x": 300.8,
+          "y": 422.1,
+          "w": 12.5,
+          "h": 12.5
+        }
+      }
+    },
+    "database_field": "insurance.has_other_insurance"
+  },
+  {
+    "id": "other_insurance_company_name",
+    "label": "Company Name (Other Insurance)",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if has_other_mediclaim == 'Yes'",
+    "coordinates": {
+      "type": "text",
+      "x": 110.1,
+      "y": 446.5,
+      "max_width": 437.0,
+      "font_size": 8.5
+    },
+    "database_field": "insurance.other_company_name"
+  },
+  {
+    "id": "other_insurance_details",
+    "label": "Give details (Other Insurance)",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if has_other_mediclaim == 'Yes'",
+    "coordinates": {
+      "type": "text",
+      "x": 93.0,
+      "y": 462.5,
+      "max_width": 455.0,
+      "font_size": 8.5
+    },
+    "database_field": "insurance.other_policy_details"
+  },
+  {
+    "id": "has_family_physician",
+    "label": "p) Do you have a family physician",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "checkbox",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "checkbox_options",
+      "options": {
+        "Yes": {
+          "x": 163.1,
+          "y": 470.2,
+          "w": 12.5,
+          "h": 12.5
+        },
+        "No": {
+          "x": 193.9,
+          "y": 470.2,
+          "w": 12.5,
+          "h": 12.5
+        }
+      }
+    },
+    "database_field": "patient.has_family_physician"
+  },
+  {
+    "id": "family_physician_name",
+    "label": "q) Name of the family physician",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if has_family_physician == 'Yes'",
+    "coordinates": {
+      "type": "text",
+      "x": 338.5,
+      "y": 478.0,
+      "max_width": 203.0,
+      "font_size": 8.5
+    },
+    "database_field": "patient.family_physician_name"
+  },
+  {
+    "id": "family_physician_contact_no",
+    "label": "r) Contact number, if any (Family Physician)",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if has_family_physician == 'Yes'",
+    "coordinates": {
+      "type": "comb",
+      "start_x": 137.85,
+      "y": 496.0,
+      "cell_width": 12.468,
+      "count": 10,
+      "font_size": 8.5,
+      "grid_cells": 10
+    },
+    "database_field": "patient.family_physician_phone"
+  },
+  {
+    "id": "insured_email_id",
+    "label": "s) Insured E-mail id",
+    "page": 1,
+    "section": "Section B: Insured / Patient",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 120.0,
+      "y": 512.0,
+      "max_width": 140.0,
+      "font_size": 8.0
+    },
+    "database_field": "patient.email"
+  },
+  {
+    "id": "treating_doctor_name",
+    "label": "a) Name of the treating doctor",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 155.9,
+      "y": 540.0,
+      "max_width": 194.0,
+      "font_size": 8.5
+    },
+    "database_field": "doctor.name"
+  },
+  {
+    "id": "treating_doctor_contact_no",
+    "label": "b) Contact number (Treating Doctor)",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 427.28,
+      "y": 541.5,
+      "cell_width": 12.468,
+      "count": 10,
+      "font_size": 8.5,
+      "grid_cells": 10
+    },
+    "database_field": "doctor.phone"
+  },
+  {
+    "id": "illness_nature_complaints",
+    "label": "c) Nature of ILLNESS / Disease with presenting complaints",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 246.0,
+      "y": 556.5,
+      "max_width": 302.0,
+      "font_size": 8.5
+    },
+    "database_field": "clinical.presenting_complaints"
+  },
+  {
+    "id": "relevant_clinical_findings",
+    "label": "d) Relevant clinical findings",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 141.2,
+      "y": 572.5,
+      "max_width": 405.5,
+      "font_size": 8.5
+    },
+    "database_field": "clinical.findings"
+  },
+  {
+    "id": "duration_present_ailment_days",
+    "label": "e) Duration of the present ailment (Days)",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 164.58,
+      "y": 588.5,
+      "cell_width": 12.468,
+      "count": 3,
+      "font_size": 8.5,
+      "grid_cells": 3
+    },
+    "database_field": "clinical.duration_days"
+  },
+  {
+    "id": "date_of_first_consultation",
+    "label": "i. Date of first consultation",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "date_dmy_segmented",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 321.69,
+          "count": 2
+        },
+        {
+          "start_x": 350.6,
+          "count": 2
+        },
+        {
+          "start_x": 379.51,
+          "count": 4
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 588.5,
+      "font_size": 8.5
+    },
+    "database_field": "clinical.first_consultation_date"
+  },
+  {
+    "id": "past_history_present_ailment",
+    "label": "i. Past history of present ailment if any",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "text",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 189.5,
+      "y": 605.0,
+      "max_width": 356.0,
+      "font_size": 8.5
+    },
+    "database_field": "clinical.past_history_present_ailment"
+  },
+  {
+    "id": "provisional_diagnosis",
+    "label": "f) Provisional diagnosis",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 124.1,
+      "y": 621.0,
+      "max_width": 248.0,
+      "font_size": 8.5
+    },
+    "database_field": "clinical.provisional_diagnosis"
+  },
+  {
+    "id": "icd_10_code",
+    "label": "i. ICD 10 Code",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 427.28,
+      "y": 619.5,
+      "cell_width": 12.468,
+      "count": 10,
+      "font_size": 8.5,
+      "grid_cells": 10
+    },
+    "database_field": "clinical.icd_10_code"
+  },
+  {
+    "id": "proposed_line_of_treatment",
+    "label": "g) Proposed line of treatment",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "checkbox_multi",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "checkbox_multi",
+      "options": {
+        "Medical Management": {
+          "x": 148.4,
+          "y": 628.4,
+          "w": 12.5,
+          "h": 12.5
+        },
+        "Surgical Management": {
+          "x": 270.6,
+          "y": 628.4,
+          "w": 12.5,
+          "h": 12.5
+        },
+        "Intensive care": {
+          "x": 423.7,
+          "y": 628.4,
+          "w": 12.5,
+          "h": 12.5
+        },
+        "Investigation": {
+          "x": 148.4,
+          "y": 643.8,
+          "w": 12.5,
+          "h": 12.5
+        },
+        "Non allopathic treatment": {
+          "x": 270.6,
+          "y": 643.8,
+          "w": 12.5,
+          "h": 12.5
+        }
+      }
+    },
+    "database_field": "clinical.treatment_lines"
+  },
+  {
+    "id": "investigation_medical_management_details",
+    "label": "h) If Investigation & / or Medical Management provide details",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "text",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if treatment_lines includes 'Medical Management' or 'Investigation'",
+    "coordinates": {
+      "type": "text",
+      "x": 252.0,
+      "y": 670.0,
+      "max_width": 298.0,
+      "font_size": 8.5
+    },
+    "database_field": "clinical.investigation_or_medical_management_details"
+  },
+  {
+    "id": "route_of_drug_administration",
+    "label": "i) Route of drug administration",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "text",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "multiline_text",
+      "lines": [
+        {
+          "x": 163.5,
+          "y": 686.0,
+          "max_width": 383.0
+        },
+        {
+          "x": 53.7,
+          "y": 702.0,
+          "max_width": 495.5
+        }
+      ],
+      "font_size": 8.5
+    },
+    "database_field": "clinical.route_of_drug_admin"
+  },
+  {
+    "id": "surgical_name_of_surgery",
+    "label": "i) If Surgical, name of surgery",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "text",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if treatment_lines includes 'Surgical Management'",
+    "coordinates": {
+      "type": "text",
+      "x": 153.1,
+      "y": 718.5,
+      "max_width": 198.5,
+      "font_size": 8.5
+    },
+    "database_field": "clinical.surgery_name"
+  },
+  {
+    "id": "icd_10_pcs_code",
+    "label": "i. ICD 10 PCS Code",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if treatment_lines includes 'Surgical Management'",
+    "coordinates": {
+      "type": "comb",
+      "start_x": 427.28,
+      "y": 720.0,
+      "cell_width": 12.468,
+      "count": 10,
+      "font_size": 8.5,
+      "grid_cells": 10
+    },
+    "database_field": "clinical.icd_10_pcs_code"
+  },
+  {
+    "id": "other_treatments_details",
+    "label": "j) If other treatments provide details",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "text",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 171.2,
+      "y": 734.5,
+      "max_width": 378.5,
+      "font_size": 8.5
+    },
+    "database_field": "clinical.other_treatment_details"
+  },
+  {
+    "id": "how_did_injury_occur",
+    "label": "k) How did injury occur",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "text",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if hospitalisation is due to accident / injury",
+    "coordinates": {
+      "type": "text",
+      "x": 126.7,
+      "y": 750.5,
+      "max_width": 419.0,
+      "font_size": 8.5
+    },
+    "database_field": "clinical.injury_cause"
+  },
+  {
+    "id": "accident_is_rta",
+    "label": "l) In case of accident: i. Is it RTA",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "checkbox",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if accident case",
+    "coordinates": {
+      "type": "checkbox_options",
+      "options": {
+        "Yes": {
+          "x": 156.7,
+          "y": 760.0,
+          "w": 12.5,
+          "h": 12.5
+        },
+        "No": {
+          "x": 185.1,
+          "y": 760.0,
+          "w": 12.5,
+          "h": 12.5
+        }
+      }
+    },
+    "database_field": "accident.is_rta"
+  },
+  {
+    "id": "accident_date_of_injury",
+    "label": "ii. Date of injury",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "date_dmy_segmented",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if accident case",
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 279.99,
+          "count": 2
+        },
+        {
+          "start_x": 308.9,
+          "count": 2
+        },
+        {
+          "start_x": 337.81,
+          "count": 4
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 769.5,
+      "font_size": 8.5
+    },
+    "database_field": "accident.injury_date"
+  },
+  {
+    "id": "accident_reported_to_police",
+    "label": "iii. Reported to Police",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "checkbox",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if accident case",
+    "coordinates": {
+      "type": "checkbox_options",
+      "options": {
+        "Yes": {
+          "x": 473.1,
+          "y": 759.0,
+          "w": 12.5,
+          "h": 12.5
+        },
+        "No": {
+          "x": 501.5,
+          "y": 759.0,
+          "w": 12.5,
+          "h": 12.5
+        }
+      }
+    },
+    "database_field": "accident.reported_to_police"
+  },
+  {
+    "id": "accident_fir_no",
+    "label": "iv. FIR No.",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if reported_to_police == 'Yes'",
+    "coordinates": {
+      "type": "comb",
+      "start_x": 88.22,
+      "y": 786.0,
+      "cell_width": 12.468,
+      "count": 7,
+      "font_size": 8.5,
+      "grid_cells": 7
+    },
+    "database_field": "accident.fir_no"
+  },
+  {
+    "id": "substance_abuse_alcohol",
+    "label": "v. Injury/Disease caused due to substance abuse/alcohol consumption",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "checkbox",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if accident case",
+    "coordinates": {
+      "type": "checkbox_options",
+      "options": {
+        "Yes": {
+          "x": 437.2,
+          "y": 775.0,
+          "w": 12.5,
+          "h": 12.5
+        },
+        "No": {
+          "x": 471.0,
+          "y": 775.0,
+          "w": 12.5,
+          "h": 12.5
+        }
+      }
+    },
+    "database_field": "accident.substance_abuse"
+  },
+  {
+    "id": "substance_abuse_test_conducted",
+    "label": "vi. Test conducted to establish this",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "checkbox",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if substance_abuse == 'Yes'",
+    "coordinates": {
+      "type": "checkbox_options",
+      "options": {
+        "Yes": {
+          "x": 174.5,
+          "y": 791.0,
+          "w": 12.5,
+          "h": 12.5
+        },
+        "No": {
+          "x": 206.0,
+          "y": 791.0,
+          "w": 12.5,
+          "h": 12.5
+        }
+      }
+    },
+    "database_field": "accident.test_conducted"
+  },
+  {
+    "id": "maternity_g",
+    "label": "l) In case of Maternity: G (Gravida)",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if maternity case",
+    "coordinates": {
+      "type": "comb",
+      "start_x": 137.78,
+      "y": 816.5,
+      "cell_width": 12.5,
+      "count": 1,
+      "font_size": 8.5,
+      "grid_cells": 1
+    },
+    "database_field": "maternity.gravida"
+  },
+  {
+    "id": "maternity_p",
+    "label": "P (Para)",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if maternity case",
+    "coordinates": {
+      "type": "comb",
+      "start_x": 163.13,
+      "y": 816.5,
+      "cell_width": 12.5,
+      "count": 1,
+      "font_size": 8.5,
+      "grid_cells": 1
+    },
+    "database_field": "maternity.para"
+  },
+  {
+    "id": "maternity_l",
+    "label": "L (Live births)",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if maternity case",
+    "coordinates": {
+      "type": "comb",
+      "start_x": 186.71,
+      "y": 816.5,
+      "cell_width": 12.5,
+      "count": 1,
+      "font_size": 8.5,
+      "grid_cells": 1
+    },
+    "database_field": "maternity.live"
+  },
+  {
+    "id": "maternity_a",
+    "label": "A (Abortions)",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if maternity case",
+    "coordinates": {
+      "type": "comb",
+      "start_x": 210.94,
+      "y": 816.5,
+      "cell_width": 12.5,
+      "count": 1,
+      "font_size": 8.5,
+      "grid_cells": 1
+    },
+    "database_field": "maternity.abortions"
+  },
+  {
+    "id": "maternity_edd",
+    "label": "Expected date of Delivery",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "date_dmy_segmented",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if maternity case",
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 318.66,
+          "count": 2
+        },
+        {
+          "start_x": 347.57,
+          "count": 2
+        },
+        {
+          "start_x": 376.48,
+          "count": 4
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 816.5,
+      "font_size": 8.5
+    },
+    "database_field": "maternity.edd"
+  },
+  {
+    "id": "maternity_lmp",
+    "label": "LMP",
+    "page": 1,
+    "section": "Section C: Treating Doctor / Hospital",
+    "owner_role": "doctor",
+    "input_type": "date_dmy_segmented",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if maternity case",
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 448.69,
+          "count": 2
+        },
+        {
+          "start_x": 477.6,
+          "count": 2
+        },
+        {
+          "start_x": 506.51,
+          "count": 4
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 816.5,
+      "font_size": 8.5
+    },
+    "database_field": "maternity.lmp"
+  },
+  {
+    "id": "admission_date",
+    "label": "a) Date of admission",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "date_dmy_6comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 124.86,
+          "count": 2
+        },
+        {
+          "start_x": 153.77,
+          "count": 2
+        },
+        {
+          "start_x": 182.68,
+          "count": 2
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 62.0,
+      "font_size": 8.5
+    },
+    "database_field": "admission.admission_date"
+  },
+  {
+    "id": "admission_time",
+    "label": "b) Time (Admission)",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "time_hhmm_segmented",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 277.5,
+          "count": 2
+        },
+        {
+          "start_x": 306.41,
+          "count": 2
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 62.0,
+      "font_size": 8.5
+    },
+    "database_field": "admission.admission_time"
+  },
+  {
+    "id": "hospitalization_event_type",
+    "label": "c) Is this an emergency/a planned hospitalization event?",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "checkbox",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "checkbox_options",
+      "options": {
+        "Emergency": {
+          "x": 242.8,
+          "y": 68.0,
+          "w": 12.5,
+          "h": 12.5
+        },
+        "Planned": {
+          "x": 299.0,
+          "y": 68.0,
+          "w": 12.5,
+          "h": 12.5
+        }
+      }
+    },
+    "database_field": "admission.admission_type"
+  },
+  {
+    "id": "expected_days_stay",
+    "label": "d) Expected no. of days stay in hospital",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 179.45,
+      "y": 93.5,
+      "cell_width": 12.468,
+      "count": 3,
+      "font_size": 8.5,
+      "grid_cells": 3
+    },
+    "database_field": "admission.expected_stay_days"
+  },
+  {
+    "id": "room_type",
+    "label": "e) Room Type",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 297.5,
+      "y": 93.5,
+      "max_width": 52.1,
+      "font_size": 7.5
+    },
+    "database_field": "admission.room_type"
+  },
+  {
+    "id": "expected_days_icu",
+    "label": "f) Expected no. of days in ICU",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "comb",
+    "required_status": "optional",
+    "conditional_rule": "Required if treatment_lines includes Intensive care or ICU charges > 0",
+    "coordinates": {
+      "type": "comb",
+      "start_x": 150.03,
+      "y": 110.0,
+      "cell_width": 12.468,
+      "count": 3,
+      "font_size": 8.5,
+      "grid_cells": 3
+    },
+    "database_field": "admission.expected_icu_days"
+  },
+  {
+    "id": "cost_room_rent_nursing",
+    "label": "g) Per Day Room Rent + Nursing & Service Charges + Patient's Diet",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "currency_comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 267.58,
+      "y": 141.0,
+      "cell_width": 12.468,
+      "count": 7,
+      "font_size": 8.5,
+      "grid_cells": 7
+    },
+    "database_field": "expenses.room_rent_nursing_diet"
+  },
+  {
+    "id": "cost_investigation_diagnostics",
+    "label": "h) Expected cost for investigation + diagnostics",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "currency_comb",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 267.58,
+      "y": 157.0,
+      "cell_width": 12.468,
+      "count": 7,
+      "font_size": 8.5,
+      "grid_cells": 7
+    },
+    "database_field": "expenses.investigation_diagnostics"
+  },
+  {
+    "id": "cost_icu_charges",
+    "label": "i) ICU Charges",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "currency_comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 267.58,
+      "y": 172.5,
+      "cell_width": 12.468,
+      "count": 7,
+      "font_size": 8.5,
+      "grid_cells": 7
+    },
+    "database_field": "expenses.icu_charges",
+    "inferred_rule": "Required if expected_days_icu > 0 (not on the form; needs hospital confirmation)"
+  },
+  {
+    "id": "cost_ot_charges",
+    "label": "j) OT Charges",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "currency_comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 267.58,
+      "y": 188.5,
+      "cell_width": 12.468,
+      "count": 7,
+      "font_size": 8.5,
+      "grid_cells": 7
+    },
+    "database_field": "expenses.ot_charges",
+    "inferred_rule": "Required if surgery selected in Section C (not on the form; needs hospital confirmation)"
+  },
+  {
+    "id": "cost_professional_fees",
+    "label": "k) Professional fees Surgeon + Anesthetist Fees + consultation Charges",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "currency_comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 267.58,
+      "y": 204.5,
+      "cell_width": 12.468,
+      "count": 7,
+      "font_size": 8.5,
+      "grid_cells": 7
+    },
+    "database_field": "expenses.professional_fees"
+  },
+  {
+    "id": "cost_medicines_consumables",
+    "label": "l) Medicines + Consumables + Cost of Implants",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "currency_comb",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 267.58,
+      "y": 237.5,
+      "cell_width": 12.468,
+      "count": 7,
+      "font_size": 8.5,
+      "grid_cells": 7
+    },
+    "database_field": "expenses.medicines_consumables_implants"
+  },
+  {
+    "id": "cost_other_hospital_expenses",
+    "label": "Other hospital expenses if any",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "currency_comb",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 267.58,
+      "y": 270.0,
+      "cell_width": 12.468,
+      "count": 7,
+      "font_size": 8.5,
+      "grid_cells": 7
+    },
+    "database_field": "expenses.other_hospital_expenses"
+  },
+  {
+    "id": "cost_all_inclusive_package",
+    "label": "m) All inclusive package charges if any applicable",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "currency_comb",
+    "required_status": "optional",
+    "conditional_rule": "Used if hospital package agreement applies",
+    "coordinates": {
+      "type": "comb",
+      "start_x": 267.58,
+      "y": 285.5,
+      "cell_width": 12.468,
+      "count": 7,
+      "font_size": 8.5,
+      "grid_cells": 7
+    },
+    "database_field": "expenses.package_charges"
+  },
+  {
+    "id": "cost_sum_total_expected",
+    "label": "n) Sum Total expected cost of hospitalization",
+    "page": 2,
+    "section": "Section D: Details of Patient Admitted",
+    "owner_role": "hospital_staff",
+    "input_type": "currency_comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 267.58,
+      "y": 302.0,
+      "cell_width": 12.468,
+      "count": 7,
+      "font_size": 8.5,
+      "grid_cells": 7
+    },
+    "database_field": "expenses.sum_total_expected"
+  },
+  {
+    "id": "chronic_diabetes_check",
+    "label": "Diabetes",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "checkbox",
+    "required_status": "mandatory_printed",
+    "conditional_rule": "The form prints this history as Mandatory but has no \"none\" option (open question Q-CHRONIC)",
+    "coordinates": {
+      "type": "checkbox",
+      "x": 364.4,
+      "y": 55.0,
+      "w": 12.5,
+      "h": 12.5
+    },
+    "database_field": "chronic.diabetes.present"
+  },
+  {
+    "id": "chronic_diabetes_since",
+    "label": "Diabetes Since (MM/YY)",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "mmyy_comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if the matching condition is ticked",
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 498.91,
+          "count": 2
+        },
+        {
+          "start_x": 527.82,
+          "count": 2
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 62.0,
+      "font_size": 8.5
+    },
+    "database_field": "chronic.diabetes.since_mmyy"
+  },
+  {
+    "id": "chronic_heart_disease_check",
+    "label": "Heart Disease",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "checkbox",
+    "required_status": "mandatory_printed",
+    "conditional_rule": "The form prints this history as Mandatory but has no \"none\" option (open question Q-CHRONIC)",
+    "coordinates": {
+      "type": "checkbox",
+      "x": 364.4,
+      "y": 69.0,
+      "w": 12.5,
+      "h": 12.5
+    },
+    "database_field": "chronic.heart_disease.present"
+  },
+  {
+    "id": "chronic_heart_disease_since",
+    "label": "Heart Disease Since (MM/YY)",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "mmyy_comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if the matching condition is ticked",
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 498.91,
+          "count": 2
+        },
+        {
+          "start_x": 527.82,
+          "count": 2
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 76.5,
+      "font_size": 8.5
+    },
+    "database_field": "chronic.heart_disease.since_mmyy"
+  },
+  {
+    "id": "chronic_hypertension_check",
+    "label": "Hypertension",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "checkbox",
+    "required_status": "mandatory_printed",
+    "conditional_rule": "The form prints this history as Mandatory but has no \"none\" option (open question Q-CHRONIC)",
+    "coordinates": {
+      "type": "checkbox",
+      "x": 364.4,
+      "y": 84.0,
+      "w": 12.5,
+      "h": 12.5
+    },
+    "database_field": "chronic.hypertension.present"
+  },
+  {
+    "id": "chronic_hypertension_since",
+    "label": "Hypertension Since (MM/YY)",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "mmyy_comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if the matching condition is ticked",
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 498.91,
+          "count": 2
+        },
+        {
+          "start_x": 527.82,
+          "count": 2
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 90.5,
+      "font_size": 8.5
+    },
+    "database_field": "chronic.hypertension.since_mmyy"
+  },
+  {
+    "id": "chronic_hyperlipidemia_check",
+    "label": "Hyperlipidemia",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "checkbox",
+    "required_status": "mandatory_printed",
+    "conditional_rule": "The form prints this history as Mandatory but has no \"none\" option (open question Q-CHRONIC)",
+    "coordinates": {
+      "type": "checkbox",
+      "x": 364.4,
+      "y": 99.0,
+      "w": 12.5,
+      "h": 12.5
+    },
+    "database_field": "chronic.hyperlipidemia.present"
+  },
+  {
+    "id": "chronic_hyperlipidemia_since",
+    "label": "Hyperlipidemia Since (MM/YY)",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "mmyy_comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if the matching condition is ticked",
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 498.91,
+          "count": 2
+        },
+        {
+          "start_x": 527.82,
+          "count": 2
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 106.0,
+      "font_size": 8.5
+    },
+    "database_field": "chronic.hyperlipidemia.since_mmyy"
+  },
+  {
+    "id": "chronic_osteoarthritis_check",
+    "label": "Osteoarthritis",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "checkbox",
+    "required_status": "mandatory_printed",
+    "conditional_rule": "The form prints this history as Mandatory but has no \"none\" option (open question Q-CHRONIC)",
+    "coordinates": {
+      "type": "checkbox",
+      "x": 364.4,
+      "y": 116.0,
+      "w": 12.5,
+      "h": 12.5
+    },
+    "database_field": "chronic.osteoarthritis.present"
+  },
+  {
+    "id": "chronic_osteoarthritis_since",
+    "label": "Osteoarthritis Since (MM/YY)",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "mmyy_comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if the matching condition is ticked",
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 498.91,
+          "count": 2
+        },
+        {
+          "start_x": 527.82,
+          "count": 2
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 123.0,
+      "font_size": 8.5
+    },
+    "database_field": "chronic.osteoarthritis.since_mmyy"
+  },
+  {
+    "id": "chronic_asthma_copd_check",
+    "label": "Asthma / COPD / Bronchitis",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "checkbox",
+    "required_status": "mandatory_printed",
+    "conditional_rule": "The form prints this history as Mandatory but has no \"none\" option (open question Q-CHRONIC)",
+    "coordinates": {
+      "type": "checkbox",
+      "x": 364.4,
+      "y": 132.0,
+      "w": 12.5,
+      "h": 12.5
+    },
+    "database_field": "chronic.asthma_copd.present"
+  },
+  {
+    "id": "chronic_asthma_copd_since",
+    "label": "Asthma / COPD / Bronchitis Since (MM/YY)",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "mmyy_comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if the matching condition is ticked",
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 498.91,
+          "count": 2
+        },
+        {
+          "start_x": 527.82,
+          "count": 2
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 139.5,
+      "font_size": 8.5
+    },
+    "database_field": "chronic.asthma_copd.since_mmyy"
+  },
+  {
+    "id": "chronic_cancer_check",
+    "label": "Cancer",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "checkbox",
+    "required_status": "mandatory_printed",
+    "conditional_rule": "The form prints this history as Mandatory but has no \"none\" option (open question Q-CHRONIC)",
+    "coordinates": {
+      "type": "checkbox",
+      "x": 364.4,
+      "y": 149.0,
+      "w": 12.5,
+      "h": 12.5
+    },
+    "database_field": "chronic.cancer.present"
+  },
+  {
+    "id": "chronic_cancer_since",
+    "label": "Cancer Since (MM/YY)",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "mmyy_comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if the matching condition is ticked",
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 498.91,
+          "count": 2
+        },
+        {
+          "start_x": 527.82,
+          "count": 2
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 155.5,
+      "font_size": 8.5
+    },
+    "database_field": "chronic.cancer.since_mmyy"
+  },
+  {
+    "id": "chronic_alcohol_drug_check",
+    "label": "Alcohol or drug abuse",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "checkbox",
+    "required_status": "mandatory_printed",
+    "conditional_rule": "The form prints this history as Mandatory but has no \"none\" option (open question Q-CHRONIC)",
+    "coordinates": {
+      "type": "checkbox",
+      "x": 364.4,
+      "y": 165.0,
+      "w": 12.5,
+      "h": 12.5
+    },
+    "database_field": "chronic.alcohol_drug.present"
+  },
+  {
+    "id": "chronic_alcohol_drug_since",
+    "label": "Alcohol or drug abuse Since (MM/YY)",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "mmyy_comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if the matching condition is ticked",
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 498.91,
+          "count": 2
+        },
+        {
+          "start_x": 527.82,
+          "count": 2
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 172.0,
+      "font_size": 8.5
+    },
+    "database_field": "chronic.alcohol_drug.since_mmyy"
+  },
+  {
+    "id": "chronic_hiv_std_check",
+    "label": "Any HIV or STD / Related ailments",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "checkbox",
+    "required_status": "mandatory_printed",
+    "conditional_rule": "The form prints this history as Mandatory but has no \"none\" option (open question Q-CHRONIC)",
+    "coordinates": {
+      "type": "checkbox",
+      "x": 364.4,
+      "y": 181.0,
+      "w": 12.5,
+      "h": 12.5
+    },
+    "database_field": "chronic.hiv_std.present"
+  },
+  {
+    "id": "chronic_hiv_std_since",
+    "label": "Any HIV or STD / Related ailments Since (MM/YY)",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "mmyy_comb",
+    "required_status": "conditional",
+    "conditional_rule": "Applies if the matching condition is ticked",
+    "coordinates": {
+      "type": "segmented_comb",
+      "segments": [
+        {
+          "start_x": 498.91,
+          "count": 2
+        },
+        {
+          "start_x": 527.82,
+          "count": 2
+        }
+      ],
+      "cell_width": 12.45,
+      "y": 188.0,
+      "font_size": 8.5
+    },
+    "database_field": "chronic.hiv_std.since_mmyy"
+  },
+  {
+    "id": "chronic_other_ailment_details",
+    "label": "Any other Ailment give details",
+    "page": 2,
+    "section": "Section D: Past History of Chronic Illness",
+    "owner_role": "doctor",
+    "input_type": "text",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 365.2,
+      "y": 240.0,
+      "max_width": 184.3,
+      "font_size": 8.0
+    },
+    "database_field": "chronic.other_details"
+  },
+  {
+    "id": "page2_doctor_name",
+    "label": "a) Name of the treating doctor (Page 2 Declaration)",
+    "page": 2,
+    "section": "Declaration & Signatures",
+    "owner_role": "doctor",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 150.0,
+      "y": 661.0,
+      "max_width": 400.0,
+      "font_size": 8.5
+    },
+    "database_field": "doctor.name"
+  },
+  {
+    "id": "page2_doctor_qualification",
+    "label": "b) Qualification",
+    "page": 2,
+    "section": "Declaration & Signatures",
+    "owner_role": "doctor",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 99.8,
+      "y": 677.0,
+      "max_width": 180.5,
+      "font_size": 8.5
+    },
+    "database_field": "doctor.qualification"
+  },
+  {
+    "id": "page2_doctor_registration_no",
+    "label": "c) Registration No. with State Code",
+    "page": 2,
+    "section": "Declaration & Signatures",
+    "owner_role": "doctor",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 415.47,
+      "y": 677.5,
+      "cell_width": 12.468,
+      "count": 11,
+      "font_size": 8.5,
+      "grid_cells": 11
+    },
+    "database_field": "doctor.registration_number_with_state_code"
+  },
+  {
+    "id": "page2_hospital_seal_box",
+    "label": "Hospital Seal (Must include Hospital ID)",
+    "page": 2,
+    "section": "Declaration & Signatures",
+    "owner_role": "hospital_staff",
+    "input_type": "physical_seal_box",
+    "required_status": "physical_action",
+    "conditional_rule": "Physical seal stamped by hospital desk or blank",
+    "coordinates": {
+      "type": "box_boundary",
+      "x": 55.4,
+      "y": 689.1,
+      "w": 174.4,
+      "h": 45.7
+    },
+    "database_field": "claim_request.hospital_seal_status"
+  },
+  {
+    "id": "page2_patient_signature_box",
+    "label": "Patient Insured Name & Signature",
+    "page": 2,
+    "section": "Declaration & Signatures",
+    "owner_role": "patient",
+    "input_type": "physical_signature_box",
+    "required_status": "physical_action",
+    "conditional_rule": "Physical signature signed by patient / insured or blank",
+    "coordinates": {
+      "type": "box_boundary",
+      "x": 364.9,
+      "y": 689.1,
+      "w": 174.4,
+      "h": 45.7
+    },
+    "database_field": "claim_request.patient_signature_status"
+  },
+  {
+    "id": "page3_patient_name",
+    "label": "a Patient's /Insured's Name",
+    "page": 3,
+    "section": "Patient / Representative Declaration",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 140.0,
+      "y": 302.0,
+      "max_width": 400.0,
+      "font_size": 8.5
+    },
+    "database_field": "patient.name"
+  },
+  {
+    "id": "page3_patient_contact_no",
+    "label": "b) Contact number (Patient Declaration)",
+    "page": 3,
+    "section": "Patient / Representative Declaration",
+    "owner_role": "patient",
+    "input_type": "comb",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "comb",
+      "start_x": 120.38,
+      "y": 313.0,
+      "cell_width": 12.468,
+      "count": 10,
+      "font_size": 8.5,
+      "grid_cells": 10
+    },
+    "database_field": "patient.phone"
+  },
+  {
+    "id": "page3_patient_email",
+    "label": "d) Email ID (optional)",
+    "page": 3,
+    "section": "Patient / Representative Declaration",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "optional",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 122.0,
+      "y": 328.0,
+      "max_width": 200.0,
+      "font_size": 8.0
+    },
+    "database_field": "patient.email"
+  },
+  {
+    "id": "page3_patient_declaration_date",
+    "label": "Date (Patient Declaration)",
+    "page": 3,
+    "section": "Patient / Representative Declaration",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 68.0,
+      "y": 361.0,
+      "max_width": 90.0,
+      "font_size": 8.5
+    },
+    "database_field": "declarations.patient_sign_date"
+  },
+  {
+    "id": "page3_patient_declaration_time",
+    "label": "Time (Patient Declaration)",
+    "page": 3,
+    "section": "Patient / Representative Declaration",
+    "owner_role": "patient",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 185.0,
+      "y": 361.0,
+      "max_width": 60.0,
+      "font_size": 8.5
+    },
+    "database_field": "declarations.patient_sign_time"
+  },
+  {
+    "id": "page3_patient_signature_box",
+    "label": "c) Patient's / Insured's Signature",
+    "page": 3,
+    "section": "Patient / Representative Declaration",
+    "owner_role": "patient",
+    "input_type": "physical_signature_box",
+    "required_status": "physical_action",
+    "conditional_rule": "Physical signature signed by patient / insured or blank",
+    "coordinates": {
+      "type": "box_boundary",
+      "x": 348.4,
+      "y": 320.3,
+      "w": 205.0,
+      "h": 45.7
+    },
+    "database_field": "declarations.patient_signature_status"
+  },
+  {
+    "id": "page3_hospital_seal_box",
+    "label": "Hospital Seal (Page 3)",
+    "page": 3,
+    "section": "Hospital Declaration",
+    "owner_role": "hospital_staff",
+    "input_type": "physical_seal_box",
+    "required_status": "physical_action",
+    "conditional_rule": "Physical seal stamped by hospital desk or blank",
+    "coordinates": {
+      "type": "box_boundary",
+      "x": 41.2,
+      "y": 697.3,
+      "w": 205.0,
+      "h": 45.7
+    },
+    "database_field": "declarations.hospital_seal_status"
+  },
+  {
+    "id": "page3_doctor_signature_box",
+    "label": "Doctor's Signature",
+    "page": 3,
+    "section": "Hospital Declaration",
+    "owner_role": "doctor",
+    "input_type": "physical_signature_box",
+    "required_status": "physical_action",
+    "conditional_rule": "Physical signature signed by doctor or blank",
+    "coordinates": {
+      "type": "box_boundary",
+      "x": 348.4,
+      "y": 697.3,
+      "w": 205.0,
+      "h": 45.7
+    },
+    "database_field": "declarations.doctor_signature_status"
+  },
+  {
+    "id": "page3_hospital_declaration_date",
+    "label": "Date (Hospital Declaration)",
+    "page": 3,
+    "section": "Hospital Declaration",
+    "owner_role": "hospital_staff",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 365.0,
+      "y": 759.0,
+      "max_width": 80.0,
+      "font_size": 8.5
+    },
+    "database_field": "declarations.hospital_sign_date"
+  },
+  {
+    "id": "page3_hospital_declaration_time",
+    "label": "Time (Hospital Declaration)",
+    "page": 3,
+    "section": "Hospital Declaration",
+    "owner_role": "hospital_staff",
+    "input_type": "text",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "text",
+      "x": 485.0,
+      "y": 759.0,
+      "max_width": 60.0,
+      "font_size": 8.5
+    },
+    "database_field": "declarations.hospital_sign_time"
+  },
+  {
+    "id": "doc_discharge_summary",
+    "label": "1. Detailed Discharge Summary and all Bills from the hospital",
+    "page": 4,
+    "section": "Documents Checklist (Task List)",
+    "owner_role": "hospital_staff",
+    "input_type": "document_upload",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "checklist_task",
+      "note": "Informational on PDF; digital task item in portal"
+    },
+    "database_field": "claim_documents.discharge_summary",
+    "inferred_rule": "Mandatory claim submission document (not on the form; needs hospital confirmation)"
+  },
+  {
+    "id": "doc_cash_memos",
+    "label": "2. Cash Memos from the Hospitals / Chemists supported by proper prescription",
+    "page": 4,
+    "section": "Documents Checklist (Task List)",
+    "owner_role": "hospital_staff",
+    "input_type": "document_upload",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "checklist_task",
+      "note": "Informational on PDF; digital task item in portal"
+    },
+    "database_field": "claim_documents.cash_memos",
+    "inferred_rule": "Required if external pharmacy/consumables billed (not on the form; needs hospital confirmation)"
+  },
+  {
+    "id": "doc_pathology_reports",
+    "label": "3. Receipts and Pathological Test Reports from Pathologists, supported by note from attending Medical Practitioner / Surgeon",
+    "page": 4,
+    "section": "Documents Checklist (Task List)",
+    "owner_role": "hospital_staff",
+    "input_type": "document_upload",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "checklist_task",
+      "note": "Informational on PDF; digital task item in portal"
+    },
+    "database_field": "claim_documents.pathology_reports",
+    "inferred_rule": "Required if diagnostic tests conducted (not on the form; needs hospital confirmation)"
+  },
+  {
+    "id": "doc_surgeon_certificate",
+    "label": "4. Surgeon's Certificate stating nature of operation performed and Surgeon's Bill and Receipt",
+    "page": 4,
+    "section": "Documents Checklist (Task List)",
+    "owner_role": "hospital_staff",
+    "input_type": "document_upload",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "checklist_task",
+      "note": "Informational on PDF; digital task item in portal"
+    },
+    "database_field": "claim_documents.surgeon_certificate",
+    "inferred_rule": "Required if surgery performed (not on the form; needs hospital confirmation)"
+  },
+  {
+    "id": "doc_cured_certificate",
+    "label": "5. Certificates from attending Medical Practitioner / Surgeon that the patient is fully cured",
+    "page": 4,
+    "section": "Documents Checklist (Task List)",
+    "owner_role": "hospital_staff",
+    "input_type": "document_upload",
+    "required_status": "unspecified",
+    "conditional_rule": null,
+    "coordinates": {
+      "type": "checklist_task",
+      "note": "Informational on PDF; digital task item in portal"
+    },
+    "database_field": "claim_documents.cured_certificate",
+    "inferred_rule": "Mandatory claim settlement document (not on the form; needs hospital confirmation)"
+  }
+]
