@@ -12,7 +12,6 @@ import {
 import { validateRequestRecord } from '@/lib/validate-request';
 import { friendlyIssues } from '@/lib/field-labels';
 import { generateInviteToken, generateOtp, hashOtp, OTP_TTL_MS } from '@/lib/otp';
-import { deleteDoc, deletePdf } from '@/lib/storage';
 
 export const dynamic = 'force-dynamic';
 
@@ -28,10 +27,10 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     const view: any = buildView(request, actor);
     if (actor.kind === 'staff') {
       const [versions, auditLogs] = await Promise.all([
-        prisma.documentVersion.findMany({ where: { requestId: request.id }, orderBy: { version: 'desc' } }),
+        prisma.documentVersion.findMany({ where: { requestId: request.id }, orderBy: { version: 'desc' }, select: { id: true, version: true, caseVersion: true, templateVersion: true, generatedAt: true, generatedBy: true, reason: true, isOutdated: true } }),
         prisma.auditLog.findMany({ where: { requestId: request.id }, orderBy: { timestamp: 'desc' }, take: 200 }),
       ]);
-      // File locations stay on the server; the PDF is fetched through the authenticated route.
+      // The stored file stays on the server; the PDF is fetched through the authenticated route.
       view.versions = versions.map((v) => ({
         id: v.id, version: v.version, caseVersion: v.caseVersion, templateVersion: v.templateVersion,
         generatedAt: v.generatedAt, generatedBy: v.generatedBy, reason: v.reason, isOutdated: v.isOutdated || v.caseVersion !== request.caseVersion,
@@ -39,7 +38,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
       view.auditLogs = auditLogs;
     }
     if (actor.kind === 'patient') {
-      const latest = await prisma.documentVersion.findFirst({ where: { requestId: request.id }, orderBy: { version: 'desc' } });
+      const latest = await prisma.documentVersion.findFirst({ where: { requestId: request.id }, orderBy: { version: 'desc' }, select: { id: true, version: true, caseVersion: true, templateVersion: true, generatedAt: true, generatedBy: true, reason: true, isOutdated: true } });
       view.pdf = latest ? { version: latest.version, generatedAt: latest.generatedAt, outdated: latest.isOutdated || latest.caseVersion !== request.caseVersion } : null;
     }
     return NextResponse.json({ request: view });
@@ -80,11 +79,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     if (actor.kind !== 'staff' || actor.user.role !== 'HOSPITAL_STAFF') return fail(403, 'Only hospital staff can delete a case');
     if (new URL(req.url).searchParams.get('confirm') !== request.requestId) return fail(400, 'Type the Request ID to confirm the deletion');
 
-    const [versions, docs, otherCases] = await Promise.all([
-      prisma.documentVersion.findMany({ where: { requestId: request.id }, select: { filePath: true } }),
-      prisma.claimChecklistDocument.findMany({ where: { requestId: request.id }, select: { filePath: true } }),
-      prisma.cashlessRequest.count({ where: { patientId: request.patientId, NOT: { id: request.id } } }),
-    ]);
+    const otherCases = await prisma.cashlessRequest.count({ where: { patientId: request.patientId, NOT: { id: request.id } } });
 
     await prisma.$transaction(async (tx) => {
       await tx.claimChecklistDocument.deleteMany({ where: { requestId: request.id } });
@@ -97,9 +92,6 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
       });
     });
 
-    // Files go after the database rows, so a failure here leaves at worst an orphan file and never a dangling record.
-    for (const v of versions) { try { deletePdf(v.filePath); } catch { /* already gone */ } }
-    for (const d of docs) { try { deleteDoc(d.filePath); } catch { /* already gone */ } }
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Delete case error:', error);
@@ -264,7 +256,7 @@ async function updateStatus(actor: Actor, request: FullRequest, body: any) {
     if (!allSectionsDone(request)) return fail(409, 'All four sections must be submitted before sending to the TPA');
     const check = validateRequestRecord(request);
     if (!check.finalisable) return fail(409, 'The case still has blocking issues', { blockers: check.blockers });
-    const latest = await prisma.documentVersion.findFirst({ where: { requestId: request.id }, orderBy: { version: 'desc' } });
+    const latest = await prisma.documentVersion.findFirst({ where: { requestId: request.id }, orderBy: { version: 'desc' }, select: { id: true, version: true, caseVersion: true, templateVersion: true, generatedAt: true, generatedBy: true, reason: true, isOutdated: true } });
     if (!latest || latest.isOutdated || latest.caseVersion !== request.caseVersion) return fail(409, 'Generate a current PDF version before sending to the TPA');
     if (request.status === 'TPA_QUERY' || request.status === 'ENHANCEMENT_REQUESTED') {
       const lastSent = await prisma.auditLog.findFirst({ where: { requestId: request.id, action: 'STATUS_CHANGED', details: { contains: '-> SUBMITTED_TO_TPA' } }, orderBy: { timestamp: 'desc' } });

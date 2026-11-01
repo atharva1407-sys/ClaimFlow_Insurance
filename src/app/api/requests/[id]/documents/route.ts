@@ -5,8 +5,7 @@ import { prisma } from '@/lib/prisma';
 import { Actor, FullRequest, auditActor, fail, loadRequest } from '@/lib/api';
 import { SUPPORTING } from '@/lib/attachments';
 import { ROLE_LABEL_SERVER } from '@/lib/roles';
-import { MAX_DOCUMENTS_PER_CASE, MAX_UPLOAD_BYTES, sniffType } from '@/lib/upload';
-import { deleteDoc, readDoc, saveDoc } from '@/lib/storage';
+import { MAX_DOCUMENTS_PER_CASE, MAX_TOTAL_BYTES, MAX_UPLOAD_BYTES, sniffType } from '@/lib/upload';
 import { EDITABLE_CASE_STATUSES } from '@/lib/workflow';
 
 export const dynamic = 'force-dynamic';
@@ -34,13 +33,15 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     const found = await loadRequest(req, params.id, { allowPatient: true });
     if ('res' in found) return found.res;
     const { actor, request } = found;
-    let docs = await prisma.claimChecklistDocument.findMany({ where: { requestId: request.id, checklistNumber: SUPPORTING }, orderBy: { uploadedAt: 'asc' } });
+    // The file bytes are read only for a download, never for the list.
+    let docs = await prisma.claimChecklistDocument.findMany({ where: { requestId: request.id, checklistNumber: SUPPORTING }, orderBy: { uploadedAt: 'asc' }, select: { id: true, fileName: true, fileSize: true, uploadedAt: true, uploadedBy: true } });
     if (actor.kind === 'patient') docs = docs.filter((d) => d.uploadedBy.endsWith('(Patient)'));
 
     const dl = new URL(req.url).searchParams.get('download');
     if (dl) {
       const doc = docs.find((d) => d.id === dl);
-      const bytes = doc ? readDoc(doc.filePath) : null;
+      const stored = doc ? await prisma.claimChecklistDocument.findUnique({ where: { id: doc.id }, select: { fileData: true } }) : null;
+      const bytes = stored?.fileData ? Buffer.from(stored.fileData) : null;
       if (!doc || !bytes) return fail(404, 'Document not found');
       return new NextResponse(new Uint8Array(bytes), {
         headers: {
@@ -73,9 +74,11 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     const form = await req.formData().catch(() => null);
     const file = form?.get('file');
     if (!(file instanceof File)) return fail(400, 'Attach a file');
-    if (file.size === 0 || file.size > MAX_UPLOAD_BYTES) return fail(400, 'File must be between 1 byte and 5 MB');
-    if ((await prisma.claimChecklistDocument.count({ where: { requestId: request.id, checklistNumber: SUPPORTING } })) >= MAX_DOCUMENTS_PER_CASE) {
-      return fail(409, `At most ${MAX_DOCUMENTS_PER_CASE} supporting documents per case`);
+    if (file.size === 0 || file.size > MAX_UPLOAD_BYTES) return fail(400, 'File must be between 1 byte and 4 MB');
+    const existing = await prisma.claimChecklistDocument.aggregate({ where: { requestId: request.id, checklistNumber: SUPPORTING }, _count: true, _sum: { fileSize: true } });
+    if (existing._count >= MAX_DOCUMENTS_PER_CASE) return fail(409, `At most ${MAX_DOCUMENTS_PER_CASE} supporting documents per case`);
+    if ((existing._sum.fileSize ?? 0) + file.size > MAX_TOTAL_BYTES) {
+      return fail(409, `Supporting documents for one case can total at most ${Math.floor(MAX_TOTAL_BYTES / (1024 * 1024) * 10) / 10} MB. Remove a file or upload a smaller one.`);
     }
 
     const bytes = Buffer.from(await file.arrayBuffer());
@@ -94,10 +97,9 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     }
 
     const key = `${request.requestId.replace(/[^A-Za-z0-9-]/g, '_')}_doc_${crypto.randomBytes(6).toString('hex')}.${type.ext}`;
-    saveDoc(key, bytes);
     const fileName = file.name.replace(/[^\w.\- ]/g, '_').slice(0, 120) || `document.${type.ext}`;
     const doc = await prisma.claimChecklistDocument.create({
-      data: { requestId: request.id, checklistNumber: SUPPORTING, documentTitle: fileName, fileName, filePath: key, fileSize: bytes.length, uploadedBy: uploaderLabel(actor, request), verified: false },
+      data: { requestId: request.id, checklistNumber: SUPPORTING, documentTitle: fileName, fileName, filePath: key, fileData: bytes, fileSize: bytes.length, uploadedBy: uploaderLabel(actor, request), verified: false },
     });
     await bumpVersion(request.id);
     const a = auditActor(actor, request);
@@ -124,7 +126,6 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     if (!isDesk && doc.uploadedBy !== uploaderLabel(actor, request)) return fail(403, 'You can only remove documents you uploaded');
 
     await prisma.claimChecklistDocument.delete({ where: { id: doc.id } });
-    deleteDoc(doc.filePath);
     await bumpVersion(request.id);
     const a = auditActor(actor, request);
     await prisma.auditLog.create({ data: { requestId: request.id, userId: a.id, userName: a.name, userRole: a.role, action: 'SUPPORTING_DOCUMENT_REMOVED', details: doc.fileName } });

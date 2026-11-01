@@ -166,7 +166,8 @@ model DocumentVersion {
   version         Int
   caseVersion     Int               @default(1)  // case data version this PDF was generated from
   templateVersion String            @default("") // sha256 prefix of the template PDF
-  filePath        String                         // private storage key, never a public URL
+  filePath        String                         // label for the stored file, never a public URL
+  fileData        Bytes?                         // the PDF itself, served only by the authenticated route
   generatedAt     DateTime          @default(now())
   generatedBy     String            // User name / system
   reason          String?
@@ -198,6 +199,7 @@ model ClaimChecklistDocument {
   documentTitle   String            // Discharge Summary, Cash Memos, Path Reports, etc.
   fileName        String
   filePath        String
+  fileData        Bytes?
   fileSize        Int
   uploadedAt      DateTime          @default(now())
   uploadedBy      String

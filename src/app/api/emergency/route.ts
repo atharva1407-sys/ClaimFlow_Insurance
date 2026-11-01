@@ -4,7 +4,7 @@ import { getSession } from '@/lib/auth';
 import { audit, buildView, exposeDevOtp, fail, mergeMeta, nextPatientCode, nextRequestId, requestInclude, withUniqueRetry } from '@/lib/api';
 import { generateCashlessPdfWithReport } from '@/lib/pdf-generator';
 import { pdfOptionsWithAttachments } from '@/lib/attachments';
-import { pdfKey, savePdf } from '@/lib/storage';
+import { pdfKey } from '@/lib/storage';
 import { toMobile10 } from '@/lib/dates';
 import { friendlyIssues } from '@/lib/field-labels';
 import { generateInviteToken, generateOtp, hashOtp, OTP_TTL_MS } from '@/lib/otp';
@@ -147,10 +147,9 @@ export async function POST(req: NextRequest) {
     let version: number | null = null;
     if (issues.length === 0) {
       const key = pdfKey(created.requestId, 1);
-      savePdf(key, bytes);
       await prisma.$transaction([
         prisma.documentVersion.create({
-          data: { requestId: created.id, version: 1, caseVersion: created.caseVersion, templateVersion, filePath: key, generatedBy: session.name, reason: 'Emergency generation' },
+          data: { requestId: created.id, version: 1, caseVersion: created.caseVersion, templateVersion, filePath: key, fileData: Buffer.from(bytes), generatedBy: session.name, reason: 'Emergency generation' },
         }),
         prisma.cashlessRequest.update({ where: { id: created.id }, data: { currentVersion: 1, latestPdfPath: key } }),
       ]);

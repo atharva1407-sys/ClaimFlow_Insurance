@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { audit, auditActor, fail, loadRequest, withUniqueRetry } from '@/lib/api';
 import { generateCashlessPdfWithReport } from '@/lib/pdf-generator';
 import { pdfOptionsWithAttachments } from '@/lib/attachments';
-import { pdfKey, readPdf, savePdf } from '@/lib/storage';
+import { pdfKey } from '@/lib/storage';
 import { validateRequestRecord } from '@/lib/validate-request';
 
 export const dynamic = 'force-dynamic';
@@ -36,7 +36,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
     if (actor.kind === 'patient') {
       const latest = await prisma.documentVersion.findFirst({ where: { requestId: request.id }, orderBy: { version: 'desc' } });
-      const bytes = latest ? readPdf(latest.filePath) : null;
+      const bytes = latest?.fileData ? Buffer.from(latest.fileData) : null;
       if (!latest || !bytes) return fail(404, 'The form has not been generated yet. The hospital desk saves it once every section is submitted.');
       return pdfResponse(bytes, `Cashless_${request.requestId}.pdf`, download, {
         'X-Pdf-Outdated': String(latest.isOutdated || latest.caseVersion !== request.caseVersion),
@@ -46,7 +46,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     if (versionParam) {
       const version = await prisma.documentVersion.findFirst({ where: { requestId: request.id, version: Number(versionParam) || -1 } });
       if (!version) return fail(404, 'Version not found');
-      const bytes = readPdf(version.filePath);
+      const bytes = version.fileData ? Buffer.from(version.fileData) : null;
       if (!bytes) return fail(404, 'Stored file is missing');
       return pdfResponse(bytes, `Cashless_${request.requestId}_v${version.version}.pdf`, download, {
         'X-Pdf-Outdated': String(version.isOutdated || version.caseVersion !== request.caseVersion),
@@ -87,14 +87,13 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     if (issues.length) return fail(422, 'Some values do not fit the printed form. Nothing was generated; shorten or correct them first.', { issues });
 
     const saved = await withUniqueRetry(async () => {
-      const last = await prisma.documentVersion.findFirst({ where: { requestId: request.id }, orderBy: { version: 'desc' } });
+      const last = await prisma.documentVersion.findFirst({ where: { requestId: request.id }, orderBy: { version: 'desc' }, select: { version: true } });
       const version = (last?.version ?? 0) + 1;
       const key = pdfKey(request.requestId, version);
-      savePdf(key, bytes);
       await prisma.$transaction([
         prisma.documentVersion.updateMany({ where: { requestId: request.id }, data: { isOutdated: true } }),
         prisma.documentVersion.create({
-          data: { requestId: request.id, version, caseVersion: request.caseVersion, templateVersion, filePath: key, generatedBy: actor.user.name, reason, isOutdated: false },
+          data: { requestId: request.id, version, caseVersion: request.caseVersion, templateVersion, filePath: key, fileData: Buffer.from(bytes), generatedBy: actor.user.name, reason, isOutdated: false },
         }),
         prisma.cashlessRequest.update({ where: { id: request.id }, data: { currentVersion: version, latestPdfPath: key } }),
       ]);

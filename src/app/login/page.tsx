@@ -10,17 +10,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ROLE_HOME, api, useDocumentTitle } from '@/lib/client';
 
-const DEMO_EMAIL: Record<string, string> = {
-  HOSPITAL_STAFF: 'hospital_desk@carehosp.com',
-  DOCTOR: 'doctor_101@carehosp.com',
-  EMERGENCY_OPERATOR: 'er@carehosp.com',
-};
-
 function LoginForm() {
   useDocumentTitle('Sign in');
   const router = useRouter();
   const params = useSearchParams();
-  const [email, setEmail] = useState(DEMO_EMAIL[params.get('role') || ''] || '');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);

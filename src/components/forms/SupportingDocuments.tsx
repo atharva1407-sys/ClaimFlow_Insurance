@@ -56,7 +56,7 @@ export function SupportingDocuments({ requestId }: { requestId: string }) {
       <CardContent className="p-6 space-y-4">
         <div className="pb-2 border-b border-slate-100">
           <h2 className="text-sm font-bold text-slate-900">Supporting documents (optional)</h2>
-          <p className="text-xs text-slate-500 mt-1">PDF, JPG or PNG, up to 5 MB each and 10 per case. They are added to the end of the final PDF, after page 4.</p>
+          <p className="text-xs text-slate-500 mt-1">PDF, JPG or PNG, up to 4 MB each and 10 per case. They are added to the end of the final PDF, after page 4.</p>
         </div>
 
         {docs.map((d) => {

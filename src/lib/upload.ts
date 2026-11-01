@@ -1,5 +1,8 @@
 // Server-only helpers for optional supporting documents.
-export const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
+// Vercel functions accept at most 4.5 MB per request and return at most 4.5 MB per response. The final PDF
+// carries every attachment, so the total per case is capped there too.
+export const MAX_UPLOAD_BYTES = 4 * 1024 * 1024;
+export const MAX_TOTAL_BYTES = process.env.VERCEL ? 3.5 * 1024 * 1024 : 25 * 1024 * 1024;
 export const MAX_DOCUMENTS_PER_CASE = 10;
 
 export type DocType = { ext: 'pdf' | 'jpg' | 'png'; mime: string };

@@ -1,5 +1,4 @@
 import { prisma } from './prisma';
-import { readDoc } from './storage';
 import { sniffType } from './upload';
 import { pdfOptionsFor } from './pdf-data';
 import type { FullRequest } from './api';
@@ -13,7 +12,7 @@ export async function pdfOptionsWithAttachments(r: FullRequest): Promise<Generat
   const docs = await prisma.claimChecklistDocument.findMany({ where: { requestId: r.id, checklistNumber: SUPPORTING }, orderBy: { uploadedAt: 'asc' } });
   const attachments: NonNullable<GeneratePdfOptions['attachments']> = [];
   for (const d of docs) {
-    const bytes = readDoc(d.filePath);
+    const bytes = d.fileData ? Buffer.from(d.fileData) : null;
     const type = bytes ? sniffType(bytes) : null;
     if (bytes && type) attachments.push({ name: d.fileName, bytes, type: type.ext });
   }
